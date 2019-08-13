@@ -1,7 +1,7 @@
 import csv
 from os import listdir
 from os.path import splitext, basename
-from module.thwhex import THWHex
+from thwmodule.thwhex import THWHex
 
 # Settings
 configfolder = 'config'
