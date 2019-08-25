@@ -29,7 +29,7 @@ u32OrgDesPage2,3235,0x00035680,unsigned int
 u8StateW,'\0' (0x00),0x00035684,unsigned char
 u8CmdSrc,'.' (0x04),0x00035685,unsigned char
 u8ActMode,'\0' (0x00),0x00035686,unsigned char
-u8LSBMode,'€' (0x80),0x00035687,unsigned char
+u8LSBMode,'Â€' (0x80),0x00035687,unsigned char
 u16SlotFlagW,64,0x00035688,unsigned short
 [1],<struct>,0x0003568C,FlashFifoW
 u32arHPage,<array>,0x0003568C,unsigned int[16]
@@ -60,7 +60,7 @@ u32OrgDesPage2,32,0x000356D8,unsigned int
 u8StateW,'\0' (0x00),0x000356DC,unsigned char
 u8CmdSrc,'.' (0x04),0x000356DD,unsigned char
 u8ActMode,'.' (0x02),0x000356DE,unsigned char
-u8LSBMode,'€' (0x80),0x000356DF,unsigned char
+u8LSBMode,'Â€' (0x80),0x000356DF,unsigned char
 u16SlotFlagW,2177,0x000356E0,unsigned short
 [2],<struct>,0x000356E4,FlashFifoW
 [3],<struct>,0x0003573C,FlashFifoW
@@ -127,5 +127,5 @@ u32OrgDesPage2,3234,0x00036390,unsigned int
 u8StateW,'\0' (0x00),0x00036394,unsigned char
 u8CmdSrc,'.' (0x04),0x00036395,unsigned char
 u8ActMode,'\0' (0x00),0x00036396,unsigned char
-u8LSBMode,'€' (0x80),0x00036397,unsigned char
+u8LSBMode,'Â€' (0x80),0x00036397,unsigned char
 u16SlotFlagW,64,0x00036398,unsigned short
