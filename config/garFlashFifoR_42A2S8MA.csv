@@ -1,75 +1,41 @@
 Expression,Value,Location,Type
-garFlashFifoR,<array>,0x00031400,FlashFifo[255]
+garFlashFifoR,<array>,0x00031400,FlashFifo[193]
 [0],<struct>,0x00031400,FlashFifo
-u32HPage,0x00001130,0x00031400,unsigned int
-u16PrdPtr,65535,0x00031404,unsigned short
-u16CPU0SlotFlag,0x0005,0x00031406,unsigned short
-u8CPU1SlotFlag,'@' (0x40),0x00031408,unsigned char
+u32HPage,0x00F3DD27,0x00031400,unsigned int
+u16PrdPtr,0xFFFF,0x00031404,unsigned short
+u16CPU0SlotFlag,16,0x00031406,unsigned short
+u8CPU1SlotFlag,'B' (0x42),0x00031408,unsigned char
 u8State,'\0' (0x00),0x00031409,unsigned char
-u8UnitCnt,'.' (0x04),0x0003140A,unsigned char
-u8StartSector,"<array>""""",0x0003140B,unsigned char[4]
-[0],0x00,0x0003140B,unsigned char
-[1],0x48,0x0003140C,unsigned char
-[2],0x68,0x0003140D,unsigned char
-[3],0xFF,0x0003140E,unsigned char
-u8XfrCnt,"<array>""""",0x0003140F,unsigned char[4]
-[0],0x10,0x0003140F,unsigned char
-[1],0x08,0x00031410,unsigned char
-[2],0x08,0x00031411,unsigned char
-[3],0x08,0x00031412,unsigned char
+u8UnitCnt,'.' (0x01),0x0003140A,unsigned char
+u8StartSector,,0x0003140B,unsigned char[4]
+[0],'h' (0x68),0x0003140B,unsigned char
+[1],,0x0003140C,unsigned char
+[2],'@' (0x40),0x0003140D,unsigned char
+[3],'`' (0x60),0x0003140E,unsigned char
+u8XfrCnt,"<array>""  """,0x0003140F,unsigned char[4]
+[0],'\b' (0x08),0x0003140F,unsigned char
+[1],' ' (0x20),0x00031410,unsigned char
+[2],' ' (0x20),0x00031411,unsigned char
+[3],'\b' (0x08),0x00031412,unsigned char
 u16BufIdx,<array>,0x00031414,unsigned short[4]
-[0],0x05E8,0x00031414,unsigned short
-[1],0x05F8,0x00031416,unsigned short
-[2],0x0600,0x00031418,unsigned short
-[3],0x0670,0x0003141A,unsigned short
+[0],1336,0x00031414,unsigned short
+[1],1648,0x00031416,unsigned short
+[2],1680,0x00031418,unsigned short
+[3],1712,0x0003141A,unsigned short
 u16CacheIdx,<array>,0x0003141C,unsigned short[4]
-[0],0x001D,0x0003141C,unsigned short
-[1],0x020C,0x0003141E,unsigned short
-[2],0x0000,0x00031420,unsigned short
-[3],0x0000,0x00031422,unsigned short
+[0],6688,0x0003141C,unsigned short
+[1],6616,0x0003141E,unsigned short
+[2],6648,0x00031420,unsigned short
+[3],6680,0x00031422,unsigned short
 uFlashPositionInfo,<struct>,0x00031424,FlashPositionInfo
-u32HPageInSuperBlock,21373,0x00031424,unsigned int
-u8Channel,'\a' (0x07),0x00031428,unsigned char
+u32HPageInSuperBlock,190169,0x00031424,unsigned int
+u8Channel,'.' (0x03),0x00031428,unsigned char
 u8InterLeaveA,'\0' (0x00),0x00031429,unsigned char
-u16FBlock,0x0001,0x0003142A,unsigned short
-u16FPage,0x00A6,0x0003142C,unsigned short
+u16FBlock,51,0x0003142A,unsigned short
+u16FPage,3543,0x0003142C,unsigned short
 u8PatIdx,'\0' (0x00),0x0003142E,unsigned char
 u8LDPCDMACnt,'\0' (0x00),0x00031430,unsigned char
 [1],<struct>,0x00031434,FlashFifo
-u32HPage,0x00001134,0x00031434,unsigned int
-u16PrdPtr,65535,0x00031438,unsigned short
-u16CPU0SlotFlag,0x0005,0x0003143A,unsigned short
-u8CPU1SlotFlag,'@' (0x40),0x0003143C,unsigned char
-u8State,'\0' (0x00),0x0003143D,unsigned char
-u8UnitCnt,'.' (0x02),0x0003143E,unsigned char
-u8StartSector,,0x0003143F,unsigned char[4]
-[0],0x28,0x0003143F,unsigned char
-[1],0x58,0x00031440,unsigned char
-[2],0xFF,0x00031441,unsigned char
-[3],0xFF,0x00031442,unsigned char
-u8XfrCnt,"<array>""""",0x00031443,unsigned char[4]
-[0],0x08,0x00031443,unsigned char
-[1],0x08,0x00031444,unsigned char
-[2],0x08,0x00031445,unsigned char
-[3],0x08,0x00031446,unsigned char
-u16BufIdx,<array>,0x00031448,unsigned short[4]
-[0],0x0608,0x00031448,unsigned short
-[1],0x0610,0x0003144A,unsigned short
-[2],0x0638,0x0003144C,unsigned short
-[3],0x0630,0x0003144E,unsigned short
-u16CacheIdx,<array>,0x00031450,unsigned short[4]
-[0],0x00D5,0x00031450,unsigned short
-[1],0x0392,0x00031452,unsigned short
-[2],0x0000,0x00031454,unsigned short
-[3],0x0000,0x00031456,unsigned short
-uFlashPositionInfo,<struct>,0x00031458,FlashPositionInfo
-u32HPageInSuperBlock,21387,0x00031458,unsigned int
-u8Channel,'\0' (0x00),0x0003145C,unsigned char
-u8InterLeaveA,'\0' (0x00),0x0003145D,unsigned char
-u16FBlock,0x0001,0x0003145E,unsigned short
-u16FPage,0x00A7,0x00031460,unsigned short
-u8PatIdx,'\0' (0x00),0x00031462,unsigned char
-u8LDPCDMACnt,'\0' (0x00),0x00031464,unsigned char
 [2],<struct>,0x00031468,FlashFifo
 [3],<struct>,0x0003149C,FlashFifo
 [4],<struct>,0x000314D0,FlashFifo
@@ -261,99 +227,3 @@ u8LDPCDMACnt,'\0' (0x00),0x00031464,unsigned char
 [190],<struct>,0x00033A98,FlashFifo
 [191],<struct>,0x00033ACC,FlashFifo
 [192],<struct>,0x00033B00,FlashFifo
-[193],<struct>,0x00033B34,FlashFifo
-[194],<struct>,0x00033B68,FlashFifo
-[195],<struct>,0x00033B9C,FlashFifo
-[196],<struct>,0x00033BD0,FlashFifo
-[197],<struct>,0x00033C04,FlashFifo
-[198],<struct>,0x00033C38,FlashFifo
-[199],<struct>,0x00033C6C,FlashFifo
-[200],<struct>,0x00033CA0,FlashFifo
-[201],<struct>,0x00033CD4,FlashFifo
-[202],<struct>,0x00033D08,FlashFifo
-[203],<struct>,0x00033D3C,FlashFifo
-[204],<struct>,0x00033D70,FlashFifo
-[205],<struct>,0x00033DA4,FlashFifo
-[206],<struct>,0x00033DD8,FlashFifo
-[207],<struct>,0x00033E0C,FlashFifo
-[208],<struct>,0x00033E40,FlashFifo
-[209],<struct>,0x00033E74,FlashFifo
-[210],<struct>,0x00033EA8,FlashFifo
-[211],<struct>,0x00033EDC,FlashFifo
-[212],<struct>,0x00033F10,FlashFifo
-[213],<struct>,0x00033F44,FlashFifo
-[214],<struct>,0x00033F78,FlashFifo
-[215],<struct>,0x00033FAC,FlashFifo
-[216],<struct>,0x00033FE0,FlashFifo
-[217],<struct>,0x00034014,FlashFifo
-[218],<struct>,0x00034048,FlashFifo
-[219],<struct>,0x0003407C,FlashFifo
-[220],<struct>,0x000340B0,FlashFifo
-[221],<struct>,0x000340E4,FlashFifo
-[222],<struct>,0x00034118,FlashFifo
-[223],<struct>,0x0003414C,FlashFifo
-[224],<struct>,0x00034180,FlashFifo
-[225],<struct>,0x000341B4,FlashFifo
-[226],<struct>,0x000341E8,FlashFifo
-[227],<struct>,0x0003421C,FlashFifo
-[228],<struct>,0x00034250,FlashFifo
-[229],<struct>,0x00034284,FlashFifo
-[230],<struct>,0x000342B8,FlashFifo
-[231],<struct>,0x000342EC,FlashFifo
-[232],<struct>,0x00034320,FlashFifo
-[233],<struct>,0x00034354,FlashFifo
-[234],<struct>,0x00034388,FlashFifo
-[235],<struct>,0x000343BC,FlashFifo
-[236],<struct>,0x000343F0,FlashFifo
-[237],<struct>,0x00034424,FlashFifo
-[238],<struct>,0x00034458,FlashFifo
-[239],<struct>,0x0003448C,FlashFifo
-[240],<struct>,0x000344C0,FlashFifo
-[241],<struct>,0x000344F4,FlashFifo
-[242],<struct>,0x00034528,FlashFifo
-[243],<struct>,0x0003455C,FlashFifo
-[244],<struct>,0x00034590,FlashFifo
-[245],<struct>,0x000345C4,FlashFifo
-[246],<struct>,0x000345F8,FlashFifo
-[247],<struct>,0x0003462C,FlashFifo
-[248],<struct>,0x00034660,FlashFifo
-[249],<struct>,0x00034694,FlashFifo
-[250],<struct>,0x000346C8,FlashFifo
-[251],<struct>,0x000346FC,FlashFifo
-[252],<struct>,0x00034730,FlashFifo
-[253],<struct>,0x00034764,FlashFifo
-[254],<struct>,0x00034798,FlashFifo
-u32HPage,0x0000112E,0x00034798,unsigned int
-u16PrdPtr,65535,0x0003479C,unsigned short
-u16CPU0SlotFlag,0x0005,0x0003479E,unsigned short
-u8CPU1SlotFlag,'@' (0x40),0x000347A0,unsigned char
-u8State,'\0' (0x00),0x000347A1,unsigned char
-u8UnitCnt,'.' (0x02),0x000347A2,unsigned char
-u8StartSector,,0x000347A3,unsigned char[4]
-[0],0x28,0x000347A3,unsigned char
-[1],0x50,0x000347A4,unsigned char
-[2],0xFF,0x000347A5,unsigned char
-[3],0xFF,0x000347A6,unsigned char
-u8XfrCnt,"<array>""""",0x000347A7,unsigned char[4]
-[0],0x08,0x000347A7,unsigned char
-[1],0x08,0x000347A8,unsigned char
-[2],0x08,0x000347A9,unsigned char
-[3],0x08,0x000347AA,unsigned char
-u16BufIdx,<array>,0x000347AC,unsigned short[4]
-[0],0x05D8,0x000347AC,unsigned short
-[1],0x05E0,0x000347AE,unsigned short
-[2],0x05F0,0x000347B0,unsigned short
-[3],0x0600,0x000347B2,unsigned short
-u16CacheIdx,<array>,0x000347B4,unsigned short[4]
-[0],0x0018,0x000347B4,unsigned short
-[1],0x0253,0x000347B6,unsigned short
-[2],0x0000,0x000347B8,unsigned short
-[3],0x0000,0x000347BA,unsigned short
-uFlashPositionInfo,<struct>,0x000347BC,FlashPositionInfo
-u32HPageInSuperBlock,21354,0x000347BC,unsigned int
-u8Channel,'.' (0x06),0x000347C0,unsigned char
-u8InterLeaveA,'\0' (0x00),0x000347C1,unsigned char
-u16FBlock,0x0001,0x000347C2,unsigned short
-u16FPage,0x00A6,0x000347C4,unsigned short
-u8PatIdx,'\0' (0x00),0x000347C6,unsigned char
-u8LDPCDMACnt,'\0' (0x00),0x000347C8,unsigned char
