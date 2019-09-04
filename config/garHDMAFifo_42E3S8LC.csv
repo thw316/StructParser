@@ -1,25 +1,17 @@
 Expression,Value,Location,Type
-garHDMAFifo,<array>,0x00021518,HDMAFifo[509]
+garHDMAFifo,<array>,0x00021518,HDMAFifo[385]
 [0],<struct>,0x00021518,HDMAFifo
 u32AESLBA,4294967295,0x00021518,unsigned int
-u16CacheIdx,240,0x0002151C,unsigned short
-u16TSBIdx,0x00F8,0x0002151E,unsigned short
-u16XfrCnt,6,0x00021520,unsigned short
-u16Mode,146,0x00021522,unsigned short
+u16CacheIdx,16824,0x0002151C,unsigned short
+u16TSBIdx,1352,0x0002151E,unsigned short
+u16XfrCnt,32,0x00021520,unsigned short
+u16Mode,50,0x00021522,unsigned short
 u16RAIDPageIdx,0,0x00021524,unsigned short
-u8FifoPtr,'z' (0x7A),0x00021526,unsigned char
+u8FifoPtr,,0x00021526,unsigned char
 u8PatIdx,,0x00021527,unsigned char
 u8RaidIdx,'\0' (0x00),0x00021528,unsigned char
+u8ActMode,'\0' (0x00),0x00021529,unsigned char
 [1],<struct>,0x0002152C,HDMAFifo
-u32AESLBA,4294967295,0x0002152C,unsigned int
-u16CacheIdx,247,0x00021530,unsigned short
-u16TSBIdx,0x00FF,0x00021532,unsigned short
-u16XfrCnt,1,0x00021534,unsigned short
-u16Mode,146,0x00021536,unsigned short
-u16RAIDPageIdx,0,0x00021538,unsigned short
-u8FifoPtr,'{' (0x7B),0x0002153A,unsigned char
-u8PatIdx,,0x0002153B,unsigned char
-u8RaidIdx,'\0' (0x00),0x0002153C,unsigned char
 [2],<struct>,0x00021540,HDMAFifo
 [3],<struct>,0x00021554,HDMAFifo
 [4],<struct>,0x00021568,HDMAFifo
@@ -403,136 +395,3 @@ u8RaidIdx,'\0' (0x00),0x0002153C,unsigned char
 [382],<struct>,0x000232F0,HDMAFifo
 [383],<struct>,0x00023304,HDMAFifo
 [384],<struct>,0x00023318,HDMAFifo
-[385],<struct>,0x0002332C,HDMAFifo
-[386],<struct>,0x00023340,HDMAFifo
-[387],<struct>,0x00023354,HDMAFifo
-[388],<struct>,0x00023368,HDMAFifo
-[389],<struct>,0x0002337C,HDMAFifo
-[390],<struct>,0x00023390,HDMAFifo
-[391],<struct>,0x000233A4,HDMAFifo
-[392],<struct>,0x000233B8,HDMAFifo
-[393],<struct>,0x000233CC,HDMAFifo
-[394],<struct>,0x000233E0,HDMAFifo
-[395],<struct>,0x000233F4,HDMAFifo
-[396],<struct>,0x00023408,HDMAFifo
-[397],<struct>,0x0002341C,HDMAFifo
-[398],<struct>,0x00023430,HDMAFifo
-[399],<struct>,0x00023444,HDMAFifo
-[400],<struct>,0x00023458,HDMAFifo
-[401],<struct>,0x0002346C,HDMAFifo
-[402],<struct>,0x00023480,HDMAFifo
-[403],<struct>,0x00023494,HDMAFifo
-[404],<struct>,0x000234A8,HDMAFifo
-[405],<struct>,0x000234BC,HDMAFifo
-[406],<struct>,0x000234D0,HDMAFifo
-[407],<struct>,0x000234E4,HDMAFifo
-[408],<struct>,0x000234F8,HDMAFifo
-[409],<struct>,0x0002350C,HDMAFifo
-[410],<struct>,0x00023520,HDMAFifo
-[411],<struct>,0x00023534,HDMAFifo
-[412],<struct>,0x00023548,HDMAFifo
-[413],<struct>,0x0002355C,HDMAFifo
-[414],<struct>,0x00023570,HDMAFifo
-[415],<struct>,0x00023584,HDMAFifo
-[416],<struct>,0x00023598,HDMAFifo
-[417],<struct>,0x000235AC,HDMAFifo
-[418],<struct>,0x000235C0,HDMAFifo
-[419],<struct>,0x000235D4,HDMAFifo
-[420],<struct>,0x000235E8,HDMAFifo
-[421],<struct>,0x000235FC,HDMAFifo
-[422],<struct>,0x00023610,HDMAFifo
-[423],<struct>,0x00023624,HDMAFifo
-[424],<struct>,0x00023638,HDMAFifo
-[425],<struct>,0x0002364C,HDMAFifo
-[426],<struct>,0x00023660,HDMAFifo
-[427],<struct>,0x00023674,HDMAFifo
-[428],<struct>,0x00023688,HDMAFifo
-[429],<struct>,0x0002369C,HDMAFifo
-[430],<struct>,0x000236B0,HDMAFifo
-[431],<struct>,0x000236C4,HDMAFifo
-[432],<struct>,0x000236D8,HDMAFifo
-[433],<struct>,0x000236EC,HDMAFifo
-[434],<struct>,0x00023700,HDMAFifo
-[435],<struct>,0x00023714,HDMAFifo
-[436],<struct>,0x00023728,HDMAFifo
-[437],<struct>,0x0002373C,HDMAFifo
-[438],<struct>,0x00023750,HDMAFifo
-[439],<struct>,0x00023764,HDMAFifo
-[440],<struct>,0x00023778,HDMAFifo
-[441],<struct>,0x0002378C,HDMAFifo
-[442],<struct>,0x000237A0,HDMAFifo
-[443],<struct>,0x000237B4,HDMAFifo
-[444],<struct>,0x000237C8,HDMAFifo
-[445],<struct>,0x000237DC,HDMAFifo
-[446],<struct>,0x000237F0,HDMAFifo
-[447],<struct>,0x00023804,HDMAFifo
-[448],<struct>,0x00023818,HDMAFifo
-[449],<struct>,0x0002382C,HDMAFifo
-[450],<struct>,0x00023840,HDMAFifo
-[451],<struct>,0x00023854,HDMAFifo
-[452],<struct>,0x00023868,HDMAFifo
-[453],<struct>,0x0002387C,HDMAFifo
-[454],<struct>,0x00023890,HDMAFifo
-[455],<struct>,0x000238A4,HDMAFifo
-[456],<struct>,0x000238B8,HDMAFifo
-[457],<struct>,0x000238CC,HDMAFifo
-[458],<struct>,0x000238E0,HDMAFifo
-[459],<struct>,0x000238F4,HDMAFifo
-[460],<struct>,0x00023908,HDMAFifo
-[461],<struct>,0x0002391C,HDMAFifo
-[462],<struct>,0x00023930,HDMAFifo
-[463],<struct>,0x00023944,HDMAFifo
-[464],<struct>,0x00023958,HDMAFifo
-[465],<struct>,0x0002396C,HDMAFifo
-[466],<struct>,0x00023980,HDMAFifo
-[467],<struct>,0x00023994,HDMAFifo
-[468],<struct>,0x000239A8,HDMAFifo
-[469],<struct>,0x000239BC,HDMAFifo
-[470],<struct>,0x000239D0,HDMAFifo
-[471],<struct>,0x000239E4,HDMAFifo
-[472],<struct>,0x000239F8,HDMAFifo
-[473],<struct>,0x00023A0C,HDMAFifo
-[474],<struct>,0x00023A20,HDMAFifo
-[475],<struct>,0x00023A34,HDMAFifo
-[476],<struct>,0x00023A48,HDMAFifo
-[477],<struct>,0x00023A5C,HDMAFifo
-[478],<struct>,0x00023A70,HDMAFifo
-[479],<struct>,0x00023A84,HDMAFifo
-[480],<struct>,0x00023A98,HDMAFifo
-[481],<struct>,0x00023AAC,HDMAFifo
-[482],<struct>,0x00023AC0,HDMAFifo
-[483],<struct>,0x00023AD4,HDMAFifo
-[484],<struct>,0x00023AE8,HDMAFifo
-[485],<struct>,0x00023AFC,HDMAFifo
-[486],<struct>,0x00023B10,HDMAFifo
-[487],<struct>,0x00023B24,HDMAFifo
-[488],<struct>,0x00023B38,HDMAFifo
-[489],<struct>,0x00023B4C,HDMAFifo
-[490],<struct>,0x00023B60,HDMAFifo
-[491],<struct>,0x00023B74,HDMAFifo
-[492],<struct>,0x00023B88,HDMAFifo
-[493],<struct>,0x00023B9C,HDMAFifo
-[494],<struct>,0x00023BB0,HDMAFifo
-[495],<struct>,0x00023BC4,HDMAFifo
-[496],<struct>,0x00023BD8,HDMAFifo
-[497],<struct>,0x00023BEC,HDMAFifo
-[498],<struct>,0x00023C00,HDMAFifo
-[499],<struct>,0x00023C14,HDMAFifo
-[500],<struct>,0x00023C28,HDMAFifo
-[501],<struct>,0x00023C3C,HDMAFifo
-[502],<struct>,0x00023C50,HDMAFifo
-[503],<struct>,0x00023C64,HDMAFifo
-[504],<struct>,0x00023C78,HDMAFifo
-[505],<struct>,0x00023C8C,HDMAFifo
-[506],<struct>,0x00023CA0,HDMAFifo
-[507],<struct>,0x00023CB4,HDMAFifo
-[508],<struct>,0x00023CC8,HDMAFifo
-u32AESLBA,4294967295,0x00023CC8,unsigned int
-u16CacheIdx,238,0x00023CCC,unsigned short
-u16TSBIdx,0x00F6,0x00023CCE,unsigned short
-u16XfrCnt,2,0x00023CD0,unsigned short
-u16Mode,146,0x00023CD2,unsigned short
-u16RAIDPageIdx,0,0x00023CD4,unsigned short
-u8FifoPtr,'x' (0x78),0x00023CD6,unsigned char
-u8PatIdx,,0x00023CD7,unsigned char
-u8RaidIdx,'\0' (0x00),0x00023CD8,unsigned char

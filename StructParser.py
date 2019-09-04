@@ -17,16 +17,12 @@ def getType(string):
     return [lOut[0]] + list(map(int, lOut[1:]))
 
 # getByteCnt return byte count
-def getByteCnt(string):
-    if (string == 'unsigned char'):
-        return 1
-    elif (string == 'unsigned short'):
-        return 2
-    elif (string == 'unsigned int'):
-        return 4
-    else:
-        print("error getByteCnt")
-        exit(1)
+getByteCnt = {
+        'unsigned char': 1,
+        'unsigned short': 2,
+        'unsigned int': 4,
+        'unsigned long long': 8
+        }
 
 # define list
 def returnList(name, offset, bytecnt, arrlen):
@@ -50,7 +46,7 @@ def returnList(name, offset, bytecnt, arrlen):
 
 # return hex value from dynamic offset with byte count
 def getHexByteLen(hexIIn, idx, byteLen):
-    return '0x' + ''.join(['%02x' % hexIIn(idx+idxByte) for idxByte in reversed(range(byteLen))])
+    return '0x' + ''.join(['%02X' % hexIIn(idx+idxByte) for idxByte in reversed(range(byteLen))])
 
 def multiplyList(myList) : 
     # Multiply elements one by one 
@@ -125,19 +121,23 @@ def main():
                         stage = 3
 
             elif stage == 3: # construct structFormat
-                if (getValue(row['Value']) == 'struct'):
-                    if (row['Expression'] == '[1]') and (getType(row['Type']) == [structName]): # found second element of AoS
+                expression = row['Expression']
+                value = getValue(row['Value'])
+                arrType = getType(row['Type'])[0]
+                arrLens = getType(row['Type'])[1:]
+
+                if (value == 'struct'):
+                    if (expression == '[1]') and (arrType == structName): # found second element of AoS
                         structSize = int(row['Location'], 16) - structBaseAddr
                         break # break rows loop to complete config parsing
-                    #else:
-                        # do nothing... need user expand struct inside AoS
-                elif (getValue(row['Value']) == 'array'):
-                    tempList = getType(row['Type'])
-                    arrType = tempList[0]
-                    arrLens = tempList[1:]
-                    structFormat.append(returnList(row['Expression']+listDim2StrDim(arrLens), int(row['Location'], 16)-structBaseAddr, getByteCnt(arrType), arrLens))
-                elif ('[' not in row['Expression']):
-                    structFormat.append(returnList(row['Expression'], int(row['Location'], 16)-structBaseAddr, getByteCnt(getType(row['Type'])[0]), [1]))
+                    else:
+                        continue # do nothing... need user expand struct inside AoS
+                elif (value == 'array') or ((arrLens != []) and (arrType in getByteCnt)):
+                    structFormat.append(returnList(row['Expression']+listDim2StrDim(arrLens), int(row['Location'], 16)-structBaseAddr, getByteCnt[arrType], arrLens))
+                elif (value == 'union'):
+                    continue # skip union
+                elif ('[' not in expression):
+                    structFormat.append(returnList(expression, int(row['Location'], 16)-structBaseAddr, getByteCnt[arrType], [1]))
 
     print("Name: %s, Lens: %s, Base Addr: 0x%08X, Size 0x%08X" % (structName, structLens, structBaseAddr, structSize))
     print("Struct format: [name, offset, byte cnt, array lens]")
@@ -156,7 +156,7 @@ def main():
 
         for idx in range(0,structLens):
             dic = {}
-            dic = {'ptr': idx, 'ptr(hex)': hex(idx)}
+            dic = {'ptr': idx, 'ptr(hex)': "0x%02X" % idx}
 
             for l in structFormat:
                 if l[3] != [1]:
