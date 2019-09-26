@@ -160,7 +160,7 @@ def main():
 
             for l in structFormat:
                 if l[3] != [1]:
-                    dic[l[0]] = ','.join([getHexByteLen(ifTHWHex, idx*structSize+l[1]+idx2, l[2]) for idx2 in range(multiplyList(l[3]))])
+                    dic[l[0]] = ','.join([getHexByteLen(ifTHWHex, idx*structSize+l[1]+idx2*l[2], l[2]) for idx2 in range(multiplyList(l[3]))])
                 else:
                     dic[l[0]] = getHexByteLen(ifTHWHex, idx*structSize+l[1], l[2])
 

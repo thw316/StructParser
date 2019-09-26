@@ -1,1 +1,1 @@
-py StructParser.py %1
+python StructParser.py %1
