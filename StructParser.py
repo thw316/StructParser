@@ -96,9 +96,13 @@ def main():
     structSize = 0 # get from struct[1] addr - struct[0] addr
 
     print("Loading %s" % cfgfile)
-    with open(cfgfile, 'r', newline='', encoding='utf-8') as csvf:
+    with open(cfgfile, 'r', newline='', errors='replace') as csvf:
 
-        rows = csv.DictReader(csvf)
+        if cfgfile.endswith(".log"):
+            rows = csv.DictReader(csvf, delimiter='\t')
+        else:
+            rows = csv.DictReader(csvf)
+
 
         stage = 1
         for row in rows:
