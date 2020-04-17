@@ -1,7 +1,9 @@
+import sys, os
+pwd = os.path.dirname(os.path.realpath(__file__))+"\\"
+sys.path.append(pwd)
+
 import csv
-from os import listdir
-from thwmodule.thwhex import THWHex
-from sys import argv
+from module.thwhex import THWHex
 
 # Settings
 cfgFolder = 'config'
@@ -64,15 +66,15 @@ def listDim2StrDim(lIn):
 def main():
 
     # handle input
-    if len(argv) == 2:
-        ifPath = argv[1] #input("Input binary path (.bin/.hex): ")
+    if len(sys.argv) == 2:
+        ifPath = sys.argv[1] #input("Input binary path (.bin/.hex): ")
     else:
         ifPath = input("Input binary path (.bin/.hex): ")
 
     ifTHWHex = THWHex(ifPath)
     print("")
     
-    cfgName = listdir(cfgFolder)
+    cfgName = os.listdir(cfgFolder)
     print ("00: load other config")
     for cfgNameIdx in range(len(cfgName)):
         print ("%02d: %s" % (cfgNameIdx+1, cfgName[cfgNameIdx]))
