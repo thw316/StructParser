@@ -23,6 +23,7 @@ getByteCnt = {
         'unsigned char': 1,
         'unsigned short': 2,
         'unsigned int': 4,
+        'unsigned int *': 4,
         'unsigned long long': 8
         }
 
@@ -30,19 +31,19 @@ getByteCnt = {
 def returnList(name, offset, bytecnt, arrlen):
     if type(name) is not str:
         print("error returnList name is not str")
-        exit(1)
+        sys.exit(1)
     
     if type(offset) is not int:
         print("error returnList offset is not int")
-        exit(1)
+        sys.exit(1)
     
     if type(bytecnt) is not int:
         print("error returnList bytecnt is not int")
-        exit(1)
+        sys.exit(1)
 
     if type(arrlen) is not list:
         print("error returnList arrlen is not int")
-        exit(1)
+        sys.exit(1)
     
     return [name, offset, bytecnt, arrlen]
 
@@ -131,6 +132,7 @@ def main():
                 value = getValue(row['Value'])
                 arrType = getType(row['Type'])[0]
                 arrLens = getType(row['Type'])[1:]
+                print(expression, value, arrType, arrLens)
 
                 if (value == 'struct'):
                     if (expression == '[1]') and (arrType == structName): # found second element of AoS
@@ -138,12 +140,25 @@ def main():
                         break # break rows loop to complete config parsing
                     else:
                         continue # do nothing... need user expand struct inside AoS
-                elif (value == 'array') or ((arrLens != []) and (arrType in getByteCnt)):
-                    structFormat.append(returnList(row['Expression']+listDim2StrDim(arrLens), int(row['Location'], 16)-structBaseAddr, getByteCnt[arrType], arrLens))
+                elif (value == 'array') and (arrLens != []):
+                    if arrType in getByteCnt:
+                        structFormat.append(returnList(row['Expression']+listDim2StrDim(arrLens), int(row['Location'], 16)-structBaseAddr, getByteCnt[arrType], arrLens))
+                    else:
+                        continue # array struct 
                 elif (value == 'union'):
                     continue # skip union
                 elif ('[' not in expression):
-                    structFormat.append(returnList(expression, int(row['Location'], 16)-structBaseAddr, getByteCnt[arrType], [1]))
+                    if arrType in getByteCnt:
+                        byteCnt = getByteCnt[arrType]
+                    else:
+                        byteCnt = input("Type %s not defined, please enter its byte count: " % arrType)
+                        if byteCnt == "":
+                            print("ignore this.")
+                            continue
+                        byteCnt = int(byteCnt)
+                        getByteCnt[arrType] = byteCnt
+                        
+                    structFormat.append(returnList(expression, int(row['Location'], 16)-structBaseAddr, byteCnt, [1]))
 
     print("Name: %s, Lens: %s, Base Addr: 0x%08X, Size 0x%08X" % (structName, structLens, structBaseAddr, structSize))
     print("Struct format: [name, offset, byte cnt, array lens]")
