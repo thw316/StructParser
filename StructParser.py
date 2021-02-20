@@ -5,21 +5,8 @@ sys.path.append(pwd)
 import csv
 from module.thwhex import THWHex
 
-# Settings
-cfgFolder = 'config'
-
-#function
-# getValue return string
-def getValue(string):  # return string of Value name
-    return string.replace('<', '').replace('>', '').split('"')[0]
-
-# getTpye return [type name, array lens] for array. return [type name] for single value.
-def getType(string):
-    lOut = string.replace(']','').split('[')
-    return [lOut[0]] + list(map(int, lOut[1:]))
-
-# getByteCnt return byte count
-getByteCnt = {
+# return byte count of types
+getByteCnt = { 
         'unsigned char': 1,
         'unsigned short': 2,
         'unsigned int': 4,
@@ -27,54 +14,51 @@ getByteCnt = {
         'unsigned long long': 8
         }
 
-# define list
-def returnList(name, offset, bytecnt, arrlen):
-    if type(name) is not str:
-        print("error returnList name is not str")
-        sys.exit(1)
-    
-    if type(offset) is not int:
-        print("error returnList offset is not int")
-        sys.exit(1)
-    
-    if type(bytecnt) is not int:
-        print("error returnList bytecnt is not int")
-        sys.exit(1)
+# return string of Value name
+def parsingvalue(string):
 
-    if type(arrlen) is not list:
-        print("error returnList arrlen is not int")
-        sys.exit(1)
-    
-    return [name, offset, bytecnt, arrlen]
+    if 'array' in string:
+        return 'array'
+    elif 'struct' in string:
+        return 'struct'
+    elif 'union' in string:
+        return 'union'
+    else:
+        return 'others'
+
+# getTpye return [type name, array lens] for array. return [type name, 1] for single value.
+def parsingtype(string):
+
+    if '[' in string:
+        string = string.replace('[', '^').replace(']','^').split('^')
+        typ = string[0]
+        arrlen = int(string[1])
+        return [typ, arrlen]
+    else:
+        return [string, 1]
+
 
 # return hex value from dynamic offset with byte count
 def getHexByteLen(hexIIn, idx, byteLen):
     return '0x' + ''.join(['%02X' % hexIIn(idx+idxByte) for idxByte in reversed(range(byteLen))])
 
-def multiplyList(myList) : 
-    # Multiply elements one by one 
-    result = 1
-    for x in myList: 
-         result = result * x  
-    return result
-
-def listDim2StrDim(lIn):
-    string = ''
-    for e in lIn:
-        string = string + '[%s]' % (str(e))
-    return string
-
 def main():
 
     # handle input
-    if len(sys.argv) == 2:
-        ifPath = sys.argv[1] #input("Input binary path (.bin/.hex): ")
-    else:
+    cfgFolder = None
+    ifPath = None
+    if len(sys.argv) >= 2:
+        cfgFolder = sys.argv[1]
+    if len(sys.argv) >= 3:
+        ifPath = sys.argv[2]
+    if len(sys.argv) > 3:
+        raise ValueError("[cfg folder] [binary path]")
+    if None == cfgFolder:
+        cfgFolder = input("Input config folder")
+    if None == ifPath:
         ifPath = input("Input binary path (.bin/.hex): ")
 
     ifTHWHex = THWHex(ifPath)
-    print("")
-    
     cfgName = os.listdir(cfgFolder)
     print ("00: load other config")
     for cfgNameIdx in range(len(cfgName)):
@@ -106,59 +90,53 @@ def main():
         else:
             rows = csv.DictReader(csvf)
 
-
         stage = 1
         for row in rows:
 
+            exp = row['Expression']
+            val = parsingvalue(row['Value'])
+            loc = int(row['Location'], 16)
+            [typ, arrlen] = parsingtype(row['Type'])
+
+            #print(row)
+            #print(exp, val, loc, typ, arrlen)
+
             if stage == 1: # found array of structs (AoS)
-                if getValue(row['Value']) == 'array': # get info of AoS
-                    structVarName = row['Expression']
-                    structBaseAddr = int(row['Location'], 16)
-                    tempList = getType(row['Type'])
-                    if len(tempList) != 2:
-                        print("error array of struct not support")
-                        exit(1)
-                    structName = tempList[0]
-                    structLens = tempList[1]
+                if 'array' == val: # get info of AoS
+                    structVarName = exp
+                    structBaseAddr = loc
+                    structName = typ
+                    structLens = arrlen
                     stage = 2
 
             elif stage == 2: # found first element of AoS
-                if (getValue(row['Value']) == 'struct'):
-                    if (row['Expression'] == '[0]') and (int(row['Location'],16) == structBaseAddr) and (getType(row['Type']) == [structName]):
+                if '[0]' == exp and loc == structBaseAddr and typ == structName:
                         stage = 3
 
             elif stage == 3: # construct structFormat
-                expression = row['Expression']
-                value = getValue(row['Value'])
-                arrType = getType(row['Type'])[0]
-                arrLens = getType(row['Type'])[1:]
-                print(expression, value, arrType, arrLens)
 
-                if (value == 'struct'):
-                    if (expression == '[1]') and (arrType == structName): # found second element of AoS
-                        structSize = int(row['Location'], 16) - structBaseAddr
-                        break # break rows loop to complete config parsing
+                if 'union' in typ:
+                    continue
+
+                if typ not in getByteCnt:
+                    if 'struct' in val:
+                        if '[1]' == exp and typ == structName: # found second element of AoS
+                            structSize = loc - structBaseAddr
+                            break # break rows loop to complete config parsing
+                        else:
+                            continue # do nothing... need user expand struct inside AoS
                     else:
-                        continue # do nothing... need user expand struct inside AoS
-                elif (value == 'array') and (arrLens != []):
-                    if arrType in getByteCnt:
-                        structFormat.append(returnList(row['Expression']+listDim2StrDim(arrLens), int(row['Location'], 16)-structBaseAddr, getByteCnt[arrType], arrLens))
-                    else:
-                        continue # array struct 
-                elif (value == 'union'):
-                    continue # skip union
-                elif ('[' not in expression):
-                    if arrType in getByteCnt:
-                        byteCnt = getByteCnt[arrType]
-                    else:
-                        byteCnt = input("Type %s not defined, please enter its byte count: " % arrType)
-                        if byteCnt == "":
-                            print("ignore this.")
+                        userinput = input("Type %s not defined, please enter its byte count: " % (typ))
+                        if userinput == "":
+                            print("Ignore this.")
                             continue
-                        byteCnt = int(byteCnt)
-                        getByteCnt[arrType] = byteCnt
-                        
-                    structFormat.append(returnList(expression, int(row['Location'], 16)-structBaseAddr, byteCnt, [1]))
+                        else:
+                            getByteCnt[typ] = int(userinput)                            
+
+                if arrlen == 1:
+                    structFormat.append([exp, loc-structBaseAddr, getByteCnt[typ], 1])
+                else:
+                    structFormat.append(["%s[%s]" % (exp, arrlen), loc-structBaseAddr, getByteCnt[typ], arrlen])
 
     print("Name: %s, Lens: %s, Base Addr: 0x%08X, Size 0x%08X" % (structName, structLens, structBaseAddr, structSize))
     print("Struct format: [name, offset, byte cnt, array lens]")
@@ -180,10 +158,11 @@ def main():
             dic = {'ptr': idx, 'ptr(hex)': "0x%02X" % idx}
 
             for l in structFormat:
-                if l[3] != [1]:
-                    dic[l[0]] = ','.join([getHexByteLen(ifTHWHex, idx*structSize+l[1]+idx2*l[2], l[2]) for idx2 in range(multiplyList(l[3]))])
-                else:
+                # print(idx, l)
+                if l[3] == 1:
                     dic[l[0]] = getHexByteLen(ifTHWHex, idx*structSize+l[1], l[2])
+                else:
+                    dic[l[0]] = ','.join([getHexByteLen(ifTHWHex, idx*structSize+l[1]+idx2*l[2], l[2]) for idx2 in range(l[3])])
 
             # print(dic)
             writer.writerow(dic)

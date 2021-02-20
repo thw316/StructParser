@@ -1,1 +1,1 @@
-python-embed-win32\python.exe StructParser.py %1
+python-embed-win32\python.exe StructParser.py config %1
